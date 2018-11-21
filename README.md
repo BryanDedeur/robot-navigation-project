@@ -51,5 +51,5 @@ sudo code
 
 ## Contributors
 Bryan Dedeurwaerder – bdedeurwaerder@nevada.unr.edu  
-Eric Duong - eduong@nevada.unr.edu
-Alton Prentice - aprentice@nevada.unr.edu
+Eric Duong - eduong@nevada.unr.edu  
+Alton Prentice - aprentice@nevada.unr.edu  
