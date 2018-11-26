@@ -37,7 +37,7 @@ cd bin
 
 ## UML Diagram for Class Structure
 
-[Alt text](OccupancyGridMappingUML.png?raw=true "Occupancy Grid Mapping Class UML")
+![Alt text](OccupancyGridMappingUML.png?raw=true "Occupancy Grid Mapping Class UML")
 
 ## LiDAR to Occupancy Grid Calculation Approach
 
