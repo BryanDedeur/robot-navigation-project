@@ -30,7 +30,7 @@ The LiDAR will cast 13 rays in the direction of the robot that will return a rea
 
 Let l = the length of the ray as it is casted
 
-we can simply find the grid points of length 1-50 at any angle by (cos(theta)xl, sin(theta)xl). Since those coordinates will contain a decimal we can round both the x and y off to find the nearest coordinate to occupy. And since these calculations will return negative numbers we also need to find the absolute values.
+we can simply find the grid points of length 1-50 at any angle by (cos(theta)*l, sin(theta)*l). Since those coordinates will contain a decimal we can round both the x and y off to find the nearest coordinate to occupy. And since these calculations will return negative numbers we also need to find the absolute values.
 
 ![Alt text](Calculations.png?raw=true "Calculations")
 
