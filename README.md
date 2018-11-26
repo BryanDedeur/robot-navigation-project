@@ -40,7 +40,7 @@ cd bin
 The output of the data is represented on a portable pixel map (.ppm) image file containing RGB color values for every pixel location.
 - Black pixels = occupied positions
 - Red pixels = robot positions
-- Grey pixels = ray casted probability approximations for occupied positions
+- Pink pixels = ray casted probability approximations for occupied positions
 
 <a href="probability-map.ppm" download="probability-map.ppm">Probability Map.ppm</a>
 
