@@ -41,48 +41,54 @@ int main() {
     std::cout << map(1, 2).getLogOddMean() << std::endl;
     std::cout << map(400, 250).getLogOddMean() << std::endl;
 
-    // occupancy map image generation
-    std::cout << "Generating 'occupancy-map.ppm' file. Please wait..." << std::endl;
+    // // raw occupancy map image generation
+    // std::cout << "Generating 'occupancy-map.ppm' file. Please wait..." << std::endl;
+    //
+    // std::ofstream img ("occupancy-map.ppm");
+    // img << "P3" << std::endl; // image format
+    // img << MAP_WIDTH << " " << MAP_HEIGHT << std::endl;
+    // img << 255 << std::endl; // color range
+    //
+    // for (int y = 0; y < MAP_HEIGHT; y++){
+    //     for (int x = 0; x < MAP_WIDTH; x++){
+    //         if ((x >= X_OCCUPIED_START && x <= X_OCCUPIED_END) && (y >= Y_OCCUPIED_START && y <= Y_OCCUPIED_END))
+    //             img << "0 0 0" << std::endl; // black pixel
+    //         else
+    //             img << "255 255 255" << std::endl; // white pixel
+    //     }
+    // }
 
-    std::ofstream img ("occupancy-map.ppm");
+    // probability map image generation
+    std::cout << "Generating 'probability-map.ppm' file. Please wait..." << std::endl;
+
+    std::ofstream img ("probability-map.ppm");
     img << "P3" << std::endl; // image format
     img << MAP_WIDTH << " " << MAP_HEIGHT << std::endl;
     img << 255 << std::endl; // color range
-
+    float max = 0, min = 0;
     for (int y = 0; y < MAP_HEIGHT; y++){
         for (int x = 0; x < MAP_WIDTH; x++){
-            if ((x >= X_OCCUPIED_START && x <= X_OCCUPIED_END) && (y >= Y_OCCUPIED_START && y <= Y_OCCUPIED_END))
-                img << "0 0 0" << std::endl; // black pixel
-            else
-                img << "255 255 255" << std::endl; // white pixel
-        }
-    }
 
-    // probability output image generation
-    std::cout << "Generating 'probability-map.ppm' file. Please wait..." << std::endl;
+            bool isRobotPosition = 0;
+            for (int i = 0; i < POSITIONS; i++)
+              if (x == X_POSITIONS[i] && y == Y_POSITIONS[i])
+                  isRobotPosition = 1;
 
-    std::ofstream img2 ("probability-map.ppm");
-    img2 << "P3" << std::endl; // image format
-    img2 << MAP_WIDTH << " " << MAP_HEIGHT << std::endl;
-    img2 << 255 << std::endl; // color range
-
-    for (int y = 0; y < MAP_HEIGHT; y++){
-        for (int x = 0; x < MAP_WIDTH; x++){
-            if (x == X_POSITIONS[0] && y == Y_POSITIONS[0]) { // define robot position
-                img2 << "255 0 0" << std::endl;
-                // if (DIRECTIONS[0] == 0) { // define direction
-                //     img << "0 0 255" << std::endl;
-                // }
+            if (isRobotPosition) { // define robot position
+                img << "255 0 0" << std::endl;
+            } else if (map(x, y).getOccupancy()) {
+                img << "0 0 0" << std::endl;
+            } else if (map(x, y).getLogOddMean() == 0) {
+                img << "255 255 255" << std::endl;
             } else { // all other positions
-                int scalar = map(x, y).getLogOddMean();
-                int r = scalar * 1,
-                    g = scalar * 1,
-                    b = scalar * 1;
-                img2 << r << " " << g << " " << b << std::endl;
+                int scalar = -map(x, y).getLogOddMean();
+                int r = 255,
+                    g = (3.5 - scalar)/3.5 * 255,
+                    b = 255;
+                img << r << " " << g << " " << b << std::endl;
             }
         }
     }
-
 
 
     return 0;
