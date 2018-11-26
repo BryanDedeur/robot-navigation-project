@@ -35,6 +35,16 @@ cd bin
 ./robot-navigation
 ```
 
+## Results
+
+The output of the data is represented on a .ppm image file containing RGB color values for every pixel.
+- Black pixels = occupied positions
+- Red pixels = robot positions 
+- Grey pixels = ray casted probability approximations for occupied positions
+
+![Alt text](probability-map.ppm?raw=true "Probability Map")
+
+
 ## UML Diagram for Class Structure
 
 ![Alt text](OccupancyGridMappingUML.png?raw=true "Occupancy Grid Mapping Class UML")
