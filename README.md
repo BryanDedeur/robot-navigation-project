@@ -23,7 +23,13 @@ make
 ```
 
 Execution
-> after running 'make' a series of executables will be available for each part of the project. Executables are placed in the bin directory. Navigate to the bin directory and type the following command into terminal
+> executables are placed in the bin directory. Navigate to the bin directory with command
+
+```
+cd bin
+```
+
+> after running 'make' a series of executables will be available for each part of the project.
 
 ```cmd
 ./robot-navigation
