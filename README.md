@@ -37,6 +37,8 @@ cd bin
 
 ## UML Diagram for Class Structure
 
+[Alt text](OccupancyGridMappingUML.png?raw=true "Occupancy Grid Mapping Class UML")
+
 ## LiDAR to Occupancy Grid Calculation Approach
 
 The LiDAR will cast 13 rays in the direction of the robot that will return a reading if an area is occupied or not. The length of each beam will have a max range of 50 units from its origin. Each ray being 15 degrees apart we can use this approach for calculating the individual points of interest that a beam will pass through.
