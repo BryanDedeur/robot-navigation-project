@@ -14,9 +14,16 @@ cd [parent-directory]/robot-navigation
 cmake .
 make
 ```
+Compilation
+> type these command in terminal in directory where the files are located. If cmake says the current version doesn't meet the minimum required cmake version, change cmake version from 3.12 to 3.x (where x is the cmake version your computer supports)
+
+```
+cmake .
+make
+```
 
 Execution
-> after running 'make' a series of executables will be available for each part of the project. Simply use
+> after running 'make' a series of executables will be available for each part of the project. Executables are placed in the bin directory. Navigate to the bin directory and type the following command into terminal
 
 ```cmd
 ./robot-navigation
