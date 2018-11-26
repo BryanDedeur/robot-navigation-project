@@ -1,0 +1,45 @@
+@startuml
+
+abstract class VectorMapInterface
+abstract class MapNodeInterface
+class VectorMap
+class MapNode
+
+MapNodeInterface <|- MapNode
+VectorMapInterface <|- VectorMap
+VectorMap "1000x1000" *-- MapNode
+
+abstract class MapNodeInterface{
+    +getOccupancy(): bool
+    +setOccupancy(occupance: bool): void
+    +getLogOddMean(): float
+    +setLogOddMean(newLogOddMean: float): void
+    +updateLogOddMean(newLogOddMean: float): void
+}
+
+abstract class VectorMapInterface{
+    +operator() (x: unsigned long, y: unsigned long): MapNode&
+    +operator() (x: unsigned long, y: unsigned long): const MapNode&
+    +updateMap(direction: int, logOddOccupied: float, logOddFree: float, x: unsigned long, y: unsigned long): void
+    +setOccupancy(occupance: bool, x: unsigned long, y: unsigned long): void
+}
+
+class MapNode{
+    -occupied_: bool
+    -logOddMean_: float
+    +getOccupancy(): bool
+    +setOccupancy(occupance: bool): void
+    +getLogOddMean(): float
+    +setLogOddMean(newLogOddMean: float): void
+    +updateLogOddMean(logOddMean: float): void
+}
+
+class VectorMap{
+    -map_: std::vector<std::vector<MapNode>>
+    +operator() (x: int, y: int): MapNode&
+    +operator() (x: int, y: int): const MapNode&
+    +updateMap(direction: int, logOddOccupied: float, logOddFree: float, x: unsigned long, y: unsigned long): void
+    +setOccupancy(occupance: bool, x: unsigned long, y: unsigned long): void
+}
+
+@enduml
