@@ -37,12 +37,13 @@ cd bin
 
 ## Results
 
-The output of the data is represented on a .ppm image file containing RGB color values for every pixel.
+The output of the data is represented on a portable pixel map (.ppm) image file containing RGB color values for every pixel location.
 - Black pixels = occupied positions
-- Red pixels = robot positions 
+- Red pixels = robot positions
 - Grey pixels = ray casted probability approximations for occupied positions
 
-![Alt text](probability-map.ppm?raw=true "Probability Map")
+<a href="probability-map.ppm" download="probability-map.ppm">Probability Map.ppm</a>
+
 
 
 ## UML Diagram for Class Structure
