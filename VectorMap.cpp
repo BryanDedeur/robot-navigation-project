@@ -1,5 +1,4 @@
 #include "VectorMap.h"
-#include <iostream>
 #include <cmath>
 
 VectorMap::VectorMap(): map_(1000, std::vector<MapNode>(1000)){}
@@ -15,7 +14,6 @@ const MapNode &VectorMap::operator()(unsigned long x, unsigned long y) const {
 void VectorMap::updateMap(int direction, float logOddOccupied, float logOddFree, unsigned long x, unsigned long y) {
     for (int theta = (direction - 90); theta <= direction + 90; theta += 15){
         for (int length = 1; length <= 50; ++length){
-            //std::cout << theta << std::endl;
             auto x_offset = static_cast<long>((cos(theta * (M_PI/180)) * length));
             auto y_offset = static_cast<long>((sin(theta * (M_PI/180)) * length));
             long x_new = x + x_offset;
