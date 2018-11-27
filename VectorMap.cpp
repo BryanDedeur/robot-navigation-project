@@ -1,4 +1,5 @@
 #include "VectorMap.h"
+#include "iostream"
 #include <cmath>
 
 VectorMap::VectorMap(): map_(1000, std::vector<MapNode>(1000)){}
@@ -18,8 +19,9 @@ void VectorMap::updateMap(int direction, float logOddOccupied, float logOddFree,
             auto y_offset = static_cast<long>((sin(theta * (M_PI/180)) * length));
             long x_new = x + x_offset;
             long y_new = y + y_offset;
+            std::cout << x_offset << ", " << y_offset << std::endl;
             if (x_new < 0 || y_new < 0) // if out of map range
-              break;
+                break;
             if ((*this)(x_new, y_new).getOccupancy()) {
                 (*this)(x_new, y_new).updateLogOddMean(logOddOccupied);
                 break;
