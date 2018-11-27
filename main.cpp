@@ -61,10 +61,10 @@ int main() {
     // probability map image generation
     std::cout << "Generating 'probability-map.ppm' file. Please wait..." << std::endl;
 
-    std::ofstream img ("probability-map.ppm");
-    img << "P3" << std::endl; // image format
-    img << MAP_WIDTH << " " << MAP_HEIGHT << std::endl;
-    img << 255 << std::endl; // color range
+    std::ofstream img2 ("probability-map.ppm");
+    img2 << "P3" << std::endl; // image format
+    img2 << MAP_WIDTH << " " << MAP_HEIGHT << std::endl;
+    img2 << 255 << std::endl; // color range
     float max = 0, min = 0;
     for (int y = 0; y < MAP_HEIGHT; y++){
         for (int x = 0; x < MAP_WIDTH; x++){
@@ -75,17 +75,17 @@ int main() {
                   isRobotPosition = 1;
 
             if (isRobotPosition) { // define robot position
-                img << "255 0 0" << std::endl;
+                img2 << "0 0 255" << std::endl;
             } else if (map(x, y).getOccupancy()) {
-                img << "0 0 0" << std::endl;
+                img2 << "0 0 0" << std::endl;
             } else if (map(x, y).getLogOddMean() == 0) {
-                img << "255 255 255" << std::endl;
+                img2 << "255 255 255" << std::endl;
             } else { // all other positions
-                int scalar = -map(x, y).getLogOddMean();
+                int scalar = map(x, y).getLogOddMean();
                 int r = 255,
-                    g = (3.5 - scalar)/3.5 * 255,
+                    g = 1 - scalar * 255,
                     b = 255;
-                img << r << " " << g << " " << b << std::endl;
+                img2 << r << " " << g << " " << b << std::endl;
             }
         }
     }
