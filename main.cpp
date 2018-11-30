@@ -4,19 +4,19 @@
 
 const int MAP_WIDTH = 1000, MAP_HEIGHT = 1000;
 
-const float LOG_ODD_OCCUPIED = 0.9,
-            LOG_ODD_FREE = 0.7;
+const float LOG_ODD_OCCUPIED = 0.9f,
+            LOG_ODD_FREE = -0.7f;
 
-const bool OCCUPIED = 1,
-           FREE = 0;
+const bool OCCUPIED = true,
+           FREE = false;
 
 const unsigned long X_OCCUPIED_START = 100,
                     X_OCCUPIED_END = 500,
                     Y_OCCUPIED_START = 250,
                     Y_OCCUPIED_END = 500;
 
-const int UP = 90,
-          DOWN = 270,
+const int UP = 270,
+          DOWN = 90,
           LEFT = 180,
           RIGHT = 0;
 
@@ -24,6 +24,16 @@ const int POSITIONS = 10;
 const unsigned long X_POSITIONS[POSITIONS] = {1, 157, 77, 70, 73, 99, 378, 658, 683, 400},
                     Y_POSITIONS[POSITIONS] = {1, 148, 274, 422, 529, 679, 607, 435, 216, 225};
 const int DIRECTIONS[POSITIONS] = {RIGHT, RIGHT, RIGHT, RIGHT, RIGHT, RIGHT, UP, LEFT, UP, DOWN};
+
+const float MAGNIFYCOLOR = 100.f;
+
+void clip(int &value){
+    if (value > 255){
+        value = 255;
+    } else if (value < 0){
+        value = 0;
+    }
+}
 
 int main() {
     VectorMap map;
@@ -66,29 +76,59 @@ int main() {
     img2 << MAP_WIDTH << " " << MAP_HEIGHT << std::endl;
     img2 << 255 << std::endl; // color range
     float max = 0, min = 0;
-    for (int y = 0; y < MAP_HEIGHT; y++){
-        for (int x = 0; x < MAP_WIDTH; x++){
+    for (unsigned long int y = 0; y < MAP_HEIGHT; y++){
+        for (unsigned long int x = 0; x < MAP_WIDTH; x++){
+            int r = 255,
+                g = 255,
+                b = 255;
 
-            bool isRobotPosition = 0;
-            for (int i = 0; i < POSITIONS; i++)
-              if (x == X_POSITIONS[i] && y == Y_POSITIONS[i])
-                  isRobotPosition = 1;
+            if (map(x, y).getOccupancy()) {
+                r = 0;
+                g = 0;
+                b = 0;
+            }
+
+            bool isRobotPosition = false;
+            for (int i = 0; i < POSITIONS; i++) {
+                if (x == X_POSITIONS[i] && y == Y_POSITIONS[i]) {
+                    isRobotPosition = true;
+                    break;
+                }
+            }
+
+            int scalar = static_cast<int>(map(x, y).getLogOddMean() * MAGNIFYCOLOR);
+            if (scalar > max)
+                max = scalar;
+            if (scalar < min)
+                min = scalar;
+            if (scalar < 0){
+                r = 255;
+                g = 255 + scalar;
+                b = 255 + scalar;
+            }
+                //if (scalar > 0){
+            else if (scalar > 0) {
+                r = 255 - scalar;
+                g = 255 - scalar;
+                b = 255;
+            }
+            clip(r);
+            clip(g);
+            clip(b);
 
             if (isRobotPosition) { // define robot position
-                img2 << "0 0 255" << std::endl;
-            } else if (map(x, y).getOccupancy()) {
-                img2 << "0 0 0" << std::endl;
-            } else if (map(x, y).getLogOddMean() == 0) {
-                img2 << "255 255 255" << std::endl;
-            } else { // all other positions
-                int scalar = map(x, y).getLogOddMean();
-                int r = 255,
-                    g = 1 - scalar * 255,
-                    b = 255;
-                img2 << r << " " << g << " " << b << std::endl;
-            }
+                r = 0;
+                g = 255;
+                b = 0;
+            } //else if (map(x, y).getLogOddMean() == 0.f) {
+                //img2 << "255 255 255" << std::endl;
+            //}
+            img2 << r << " " << g << " " << b << std::endl;
         }
     }
+    std::cout << "The max of the log odd mean is " << max << " the min is " <<  min << std::endl;
+
+
 
 
     return 0;
