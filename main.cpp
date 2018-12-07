@@ -1,8 +1,11 @@
 #include <fstream>
 #include <iostream>
 #include "VectorMap.h"
+#include <time.h>
+#include <random>
+#include <math.h>
 
-const int MAP_WIDTH = 1000, MAP_HEIGHT = 1000;
+const int MAP_WIDTH = 100, MAP_HEIGHT = 100;
 
 const float LOG_ODD_OCCUPIED = 0.9f,
             LOG_ODD_FREE = -0.7f;
@@ -35,11 +38,29 @@ void clip(int &value){
     }
 }
 
+std::ofstream definePPM(std::string filename) {
+    std::cout << "Generating " << filename << ".ppm file. Please wait..." << std::endl;
+    std::ofstream ppm (filename + ".ppm");
+    ppm << "P3" << std::endl; // image format
+    ppm << MAP_WIDTH << " " << MAP_HEIGHT << std::endl;
+    ppm << 255 << std::endl; // color range
+    return ppm;
+}
+
+void makePath(int lastX, int lastY, int newX, int newY, int pointMap[MAP_WIDTH][MAP_HEIGHT]) {
+    int distance = static_cast<int>(sqrt(pow(newX-lastX,2)+pow(newY-lastY,2))); //  TODO: distance is good, theta is not
+    int theta = static_cast<int>(atan((newY-lastY)/(newX-lastX)) * (180/M_PI)); //  TODO: prevent dividing by zero
+    std::cout << "The length from (" << lastX << ',' << lastY << ") to (" << newX << ',' << newY << ") is " << distance << std::endl;
+    std::cout << "Theta is " << theta << std::endl;
+    for (distance -= 1; distance > 0; --distance)
+        pointMap[lastX + static_cast<int>(cos(theta * (M_PI/180)) * distance)][lastY + static_cast<int>(sin(theta * (M_PI/180)) * distance)] = 2;
+}
+
 int main() {
     VectorMap map;
 
-    for (unsigned long x = X_OCCUPIED_START; x <= X_OCCUPIED_END; ++x){
-        for (unsigned long y = Y_OCCUPIED_START; y <= Y_OCCUPIED_END; ++y){
+    for (unsigned long x = X_OCCUPIED_START; x <= X_OCCUPIED_END; ++x) {
+        for (unsigned long y = Y_OCCUPIED_START; y <= Y_OCCUPIED_END; ++y) {
             map.setOccupancy(OCCUPIED, x, y);
         }
     }
@@ -48,13 +69,41 @@ int main() {
         map.updateMap(DIRECTIONS[p], LOG_ODD_OCCUPIED, LOG_ODD_FREE, X_POSITIONS[p], Y_POSITIONS[p]);
     }
 
-    // probability map image generation
-    std::cout << "Generating 'probability-map.ppm' file. Please wait..." << std::endl;
+    // random line generation test
+    int pointMap[MAP_WIDTH][MAP_HEIGHT] = {0};
 
-    std::ofstream img2 ("probability-map.ppm");
-    img2 << "P3" << std::endl; // image format
-    img2 << MAP_WIDTH << " " << MAP_HEIGHT << std::endl;
-    img2 << 255 << std::endl; // color range
+    std::random_device generator;
+    std::uniform_int_distribution<int> randomX(1, MAP_WIDTH);
+    std::uniform_int_distribution<int> randomY(1, MAP_HEIGHT);
+
+    int lastX = randomX(generator);
+    int lastY = randomY(generator);
+    for (int i = 0; i < 2; i++) { // run 5 tests points
+        int newX = randomX(generator);
+        int newY = randomY(generator);
+        makePath(lastX, lastY, newX, newY, pointMap);
+        lastX = newX;
+        lastY = newY;
+        pointMap[lastX][lastY] = 1;
+    }
+
+    std::ofstream img = definePPM("random-lines");
+    for (unsigned long int y = 0; y < MAP_HEIGHT; y++) {
+        for (unsigned long int x = 0; x < MAP_WIDTH; x++) {
+            int r = 255,
+                g = 255,
+                b = 255;
+            if ( pointMap[x][y] == 1)
+                r = 0, g = 0, b = 0;
+            else if (pointMap[x][y] == 2)
+                r = 255, g = 0, b = 0;
+
+            img << r << " " << g << " " << b << std::endl;
+        }
+    }
+
+    // probability map image generation
+    std::ofstream img2 = definePPM("probability-map");
     float max = 0, min = 0;
     for (unsigned long int y = 0; y < MAP_HEIGHT; y++){
         for (unsigned long int x = 0; x < MAP_WIDTH; x++){
@@ -86,7 +135,7 @@ int main() {
                 g = 255 + scalar;
                 b = 255 + scalar;
             }
-                //if (scalar > 0){
+
             else if (scalar > 0) {
                 r = 255 - scalar;
                 g = 255 - scalar;
@@ -96,13 +145,11 @@ int main() {
             clip(g);
             clip(b);
 
-            if (isRobotPosition) { // define robot position
+            if (isRobotPosition) {
                 r = 0;
                 g = 255;
                 b = 0;
-            } //else if (map(x, y).getLogOddMean() == 0.f) {
-                //img2 << "255 255 255" << std::endl;
-            //}
+            }
             img2 << r << " " << g << " " << b << std::endl;
         }
     }
