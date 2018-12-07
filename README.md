@@ -38,9 +38,9 @@ cd bin
 ## Results
 
 The output of the data is represented on a portable pixel map (.ppm) image file containing RGB color values for every pixel location.
-- Black pixels = occupied positions
-- Green pixels = robot positions
-- Red pixels = are unoccupied points detected by the LiDAR (log odd mean result)
+- Black pixels: occupied positions
+- Green pixels: robot positions
+- Red pixels: are unoccupied points detected by the LiDAR (log odd mean result)
 - Blue pixels: are occupied points detected by the LiDAR (log odd mean result)
 
 ##### Reoccuring LiDAR scan at a single point
@@ -59,7 +59,7 @@ The following is the results of the log odd mean testing at robot position (400,
 | 8    | 7.2            | -5.6             |
 | 9    | 8.1            | -6.3             |
 
-<a href="probability-map.ppm" download="probability-map.ppm">Probability Map.ppm</a>
+<a href="probability-map.ppm" download="probability-map.ppm">Actual Probability Map.ppm</a>
 
 ![Alt text](Probability-map.png?raw=true "Probability Map")
 
