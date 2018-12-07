@@ -47,8 +47,6 @@ The output of the data is represented on a portable pixel map (.ppm) image file 
 
 The following is the results of the log odd mean testing at robot position (400, 225)
 
-
-
 | scan | LOM (occupied) | LOM (unoccupied) |
 | ---- | -------------- | ---------------- |
 | 1    | 0.9            | -0.7             |
@@ -63,7 +61,7 @@ The following is the results of the log odd mean testing at robot position (400,
 
 <a href="probability-map.ppm" download="probability-map.ppm">Probability Map.ppm</a>
 
-
+![Alt text](Probability-map.png?raw=true "Probability Map")
 
 ## UML Diagram for Class Structure
 
