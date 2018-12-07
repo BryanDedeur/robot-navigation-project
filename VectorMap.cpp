@@ -33,7 +33,6 @@ void VectorMap::updateMap(int direction, float logOddOccupied, float logOddFree,
                 break;
             }
             (*this)(static_cast<unsigned long>(x_new), static_cast<unsigned long>(y_new)).updateLogOddMean(logOddFree);
-            // std::cout << x_offset << ", " << y_offset << std::endl;
         }
     }
 }
