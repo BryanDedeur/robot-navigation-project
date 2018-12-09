@@ -57,6 +57,9 @@ void makePath(int lastX, int lastY, int newX, int newY, int pointMap[MAP_WIDTH][
 }
 
 void testRandomPositions(VectorMap &map) {
+//    std::cout << "| position | occupancy detected |" << std::endl;
+//    std::cout << "| -------- | ------------------ |" << std::endl;
+//    std::cout << std::endl;
     for (unsigned p = 0; p < POSITIONS; ++p) {
         std::random_device generator;
         std::uniform_int_distribution<int> randomDirection(1, 360);
@@ -112,7 +115,7 @@ int main() {
     const int testPos = 9;
 
     if (RANDOM_MAP) {
-        setRandomOccupancy(map, MAP_WIDTH/2, MAP_HEIGHT/2, 10000);
+        setRandomOccupancy(map, MAP_WIDTH/2, MAP_HEIGHT/2, (MAP_HEIGHT*MAP_WIDTH)*.01);
         testRandomPositions(map);
     } else {
         for (unsigned long x = X_OCCUPIED_START; x <= X_OCCUPIED_END; ++x) {
@@ -141,38 +144,38 @@ int main() {
     }
 
     // random line generation test
-//    int pointMap[MAP_WIDTH][MAP_HEIGHT] = {0};
-//
-//    std::random_device generator;
-//    std::uniform_int_distribution<int> randomPlotX(1, MAP_WIDTH);
-//    std::uniform_int_distribution<int> randomPlotY(1, MAP_HEIGHT);
+    int pointMap[MAP_WIDTH][MAP_HEIGHT] = {0};
 
-//
-//    int lastX = randomPlotX(generator);
-//    int lastY = randomPlotY(generator);
-//    for (int i = 0; i < 10; i++) { // run 5 tests points
-//        int newX = randomOffset(generator);
-//        int newY = randomOffset(generator);
-//        makePath(lastX, lastY, newX, newY, pointMap);
-//        lastX = newX;
-//        lastY = newY;
-//        pointMap[lastX][lastY] = 1;
-//    }
-//
-//    std::ofstream img = definePPM("random-lines");
-//    for (unsigned long int y = 0; y < MAP_HEIGHT; y++) {
-//        for (unsigned long int x = 0; x < MAP_WIDTH; x++) {
-//            int r = 255,
-//                g = 255,
-//                b = 255;
-//            if ( pointMap[x][y] == 1)
-//                r = 0, g = 0, b = 0;
-//            else if (pointMap[x][y] == 2)
-//                r = 0, g = 100, b = 100;
-//
-//            img << r << " " << g << " " << b << std::endl;
-//        }
-//    }
+    std::random_device generator;
+    std::uniform_int_distribution<int> randomPlotX(1, MAP_WIDTH);
+    std::uniform_int_distribution<int> randomPlotY(1, MAP_HEIGHT);
+
+
+    int lastX = randomPlotX(generator);
+    int lastY = randomPlotY(generator);
+    for (int i = 0; i < 10; i++) { // run 5 tests points
+        int newX = randomPlotX(generator);
+        int newY = randomPlotY(generator);
+        makePath(lastX, lastY, newX, newY, pointMap);
+        lastX = newX;
+        lastY = newY;
+        pointMap[lastX][lastY] = 1;
+    }
+
+    std::ofstream img = definePPM("random-lines");
+    for (unsigned long int y = 0; y < MAP_HEIGHT; y++) {
+        for (unsigned long int x = 0; x < MAP_WIDTH; x++) {
+            int r = 255,
+                g = 255,
+                b = 255;
+            if ( pointMap[x][y] == 1)
+                r = 0, g = 0, b = 0;
+            else if (pointMap[x][y] == 2)
+                r = 0, g = 100, b = 100;
+
+            img << r << " " << g << " " << b << std::endl;
+        }
+    }
 
     // probability map image generation
     std::ofstream img2 = definePPM("probability-map");
