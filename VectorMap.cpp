@@ -5,11 +5,19 @@
 VectorMap::VectorMap(): map_(1000, std::vector<MapNode>(1000)){}
 
 MapNode &VectorMap::operator()(unsigned long x, unsigned long y) {
-    return map_.at(x).at(y);
+    try {
+        return map_.at(x).at(y);
+    } catch (...) {
+        return map_.at(0).at(0);
+    }
 }
 
 const MapNode &VectorMap::operator()(unsigned long x, unsigned long y) const {
-    return map_.at(x).at(y);
+    try {
+        return map_.at(x).at(y);
+    } catch (...) {
+        return map_.at(0).at(0);
+    }
 }
 
 void VectorMap::updateMap(int direction, float logOddOccupied, float logOddFree, unsigned long x, unsigned long y) {
@@ -38,5 +46,9 @@ void VectorMap::updateMap(int direction, float logOddOccupied, float logOddFree,
 }
 
 void VectorMap::setOccupancy(bool occupance, unsigned long x, unsigned long y) {
-    (*this)(x, y).setOccupancy(occupance);
+    try {
+        (*this)(x, y).setOccupancy(occupance);
+    } catch (...) {
+        std::cout << "this point is out of range (" << x << ", " << y << ")." << std::endl;
+    }
 }
