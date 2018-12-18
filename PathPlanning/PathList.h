@@ -13,10 +13,10 @@ class PathList {
   std::shared_ptr<PathNode> tail_;
  public:
   PathList();
-  explicit PathList(const std::shared_ptr<PathNode> &start);
+  PathList(std::shared_ptr<PathNode> start);
   ~PathList();
 
-  void add(const std::shared_ptr<PathNode> &newVertex);
+  void add(std::shared_ptr<PathNode> newVertex);
   std::shared_ptr<PathNode> getTail() const;
 };
 
