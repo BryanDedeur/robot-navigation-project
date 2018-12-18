@@ -15,11 +15,11 @@ class PathMap {
  private:
   std::unique_ptr<PathList> vertices_;
  public:
-  explicit PathMap(const std::shared_ptr<PathNode> &start);
+  explicit PathMap(std::shared_ptr<PathNode> start);
   ~PathMap();
 
-  std::shared_ptr<PathNode> findNearest(const std::shared_ptr<PathNode> &vertex) const;
-  void addVertex(const std::shared_ptr<PathNode> &newVertex);
+  std::shared_ptr<PathNode> findNearest(std::shared_ptr<PathNode> vertex) const;
+  void addVertex(std::shared_ptr<PathNode> newVertex);
   int outputPathFound(unsigned long x_vertices[], unsigned long y_vertices[], int size) const;
 };
 
