@@ -8,7 +8,7 @@
 #include <time.h>
 #include <set>
 
-const int MAP_WIDTH = 1000, MAP_HEIGHT = 1000, MAX_VERTICES = 1000000;
+const int MAP_WIDTH = 1000, MAP_HEIGHT = 1000, MAX_VERTICES = 1000;
 
 const bool OCCUPIED = true,
            FREE = false;
