@@ -77,6 +77,7 @@ int main() {
     }
   }
 
+  // TODO: fix logic in while loops, code gets stuck in seemingly infinite loop
   while (!(random_vertex == end)){
     do{
       x_coordinate = distribution(generator);
