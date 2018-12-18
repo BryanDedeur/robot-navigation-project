@@ -4,15 +4,21 @@
 
 #include "PathList.h"
 PathList::PathList() = default;
-PathList::PathList(const std::shared_ptr<PathNode> &start):
-  tail_(start) {}
+PathList::PathList(std::shared_ptr<PathNode> start):
+  tail_(start) {
+
+}
+
 PathList::~PathList() {
   tail_.reset();
 }
-void PathList::add(const std::shared_ptr<PathNode> &newVertex) {
-  newVertex->setNext(tail_);
+
+void PathList::add(std::shared_ptr<PathNode> newVertex) {
+//  newVertex->setNext(tail_);
   tail_->setNext(newVertex);
+  tail_ = newVertex;
 }
+
 std::shared_ptr<PathNode> PathList::getTail() const {
   return tail_;
 }
