@@ -5,10 +5,10 @@
 #include "PathNode.h"
 
 PathNode::PathNode():
-  x_(0), y_(0) {}
+  x_(0), y_(0), next_(nullptr), pointsTo_(nullptr) {}
 
 PathNode::PathNode(unsigned long x, unsigned long y):
-  x_(x), y_(y){}
+  x_(x), y_(y), next_(nullptr), pointsTo_(nullptr) {}
 
 unsigned long PathNode::getX() const {
   return x_;
