@@ -20,7 +20,7 @@ class PathMap {
 
   std::shared_ptr<PathNode> findNearest(std::shared_ptr<PathNode> vertex) const;
   void addVertex(std::shared_ptr<PathNode> newVertex);
-  int outputPathFound(unsigned long x_vertices[], unsigned long y_vertices[], int size) const;
+  int outputPathFound() const;
 };
 
 #endif //PATHPLANNING_PATHMAP_H
