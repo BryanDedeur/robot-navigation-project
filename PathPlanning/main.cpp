@@ -8,7 +8,7 @@
 #include <time.h>
 #include <set>
 
-const int MAP_WIDTH = 1000, MAP_HEIGHT = 1000, MAX_VERTICES = 1000;
+const int MAP_WIDTH = 1000, MAP_HEIGHT = 1000;
 
 const bool OCCUPIED = true,
            FREE = false;
@@ -29,19 +29,20 @@ bool collides(const std::shared_ptr<PathNode> &currVertex, const std::shared_ptr
                 x_test = testVertex->getX(),
                 y_test = testVertex->getY();
 
-  if (x_test > x_curr) x_length = x_test - x_curr;
-  else x_length = x_curr - x_test;
-  if (y_test > y_curr) y_length = y_test - y_curr;
-  else y_length = y_curr - y_test;
+  x_length = x_test - x_curr;
+  y_length = y_test - y_curr;
 
   distance = sqrt(x_length * x_length + y_length * y_length);
   x_inc = x_length/distance;
   y_inc = y_length/distance;
 
   for (double x = x_curr, y = y_curr;
-       static_cast<unsigned long>(x) < x_test &&
-       static_cast<unsigned long>(y) < y_test;
+       (x_test > static_cast<unsigned long>(x) ? x_test - static_cast<unsigned long>(x) : static_cast<unsigned long>(x) - x_test) > 10 ||
+       (y_test > static_cast<unsigned long>(y) ? y_test - static_cast<unsigned long>(y) : static_cast<unsigned long>(y) - y_test) > 10;
        x += x_inc, y += y_inc){
+    std::cout << (x_test > static_cast<unsigned long>(x) ? x_test - static_cast<unsigned long>(x) : static_cast<unsigned long>(x) - x_test) << " ";
+    std::cout << (y_test > static_cast<unsigned long>(y) ? y_test - static_cast<unsigned long>(y) : static_cast<unsigned long>(y) - y_test) << std::endl;
+
     auto x_offset = static_cast<unsigned long>(x);
     auto y_offset = static_cast<unsigned long>(y);
     if (map(x_offset, y_offset).getOccupancy()) return true;
@@ -64,12 +65,9 @@ int main() {
   std::set<unsigned long> generated_x;
   std::set<unsigned long> generated_y;
 
-  unsigned long x_vertices[MAX_VERTICES] = {0};
-  unsigned long y_vertices[MAX_VERTICES] = {0};
   int vertices = 0;
 
   unsigned long x_coordinate, y_coordinate;
-  bool x_notExisted, y_notExisted;
 
   for (unsigned long x = X_OCCUPIED_START; x <= X_OCCUPIED_END; ++x) {
     for (unsigned long y = Y_OCCUPIED_START; y <= Y_OCCUPIED_END; ++y) {
@@ -82,25 +80,17 @@ int main() {
     do{
       x_coordinate = distribution(generator);
       y_coordinate = distribution(generator);
-      x_notExisted = generated_x.find(x_coordinate) != generated_x.end();
-      y_notExisted = generated_y.find(y_coordinate) != generated_y.end();
-    } while(x_notExisted && y_notExisted && !map(x_coordinate, y_coordinate).getOccupancy());
-    if (x_notExisted) generated_x.insert(x_coordinate);
-    if (y_notExisted) generated_y.insert(y_coordinate);
-    random_vertex->setCoordinate(x_coordinate, y_coordinate);
+      random_vertex = std::make_shared<PathNode>(x_coordinate, y_coordinate);
+    } while(path.findNearest(random_vertex) == random_vertex || map(x_coordinate, y_coordinate).getOccupancy());
     nearest_vertex = path.findNearest(random_vertex);
+    std::cout << nearest_vertex->getX() << "\t" << nearest_vertex->getY() << std::endl;
     if (!collides(nearest_vertex, random_vertex, map)){
       random_vertex->setPointsTo(nearest_vertex);
       path.addVertex(random_vertex);
     }
   }
 
-  vertices = path.outputPathFound(x_vertices, y_vertices, MAX_VERTICES);
-
-  std::cout << "x\ty" << std::endl;
-  for (int i = 0; i < vertices; ++i){
-    std::cout << x_vertices[i] << '\t' << y_vertices[i] << std::endl;
-  }
+  vertices = path.outputPathFound();
 
   return 0;
 }
