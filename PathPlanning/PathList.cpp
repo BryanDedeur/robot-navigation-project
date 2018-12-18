@@ -3,10 +3,12 @@
 //
 
 #include "PathList.h"
-PathList::PathList() = default;
+PathList::PathList(): tail_(nullptr){
+
+}
+
 PathList::PathList(std::shared_ptr<PathNode> start):
   tail_(start) {
-
 }
 
 PathList::~PathList() {
@@ -14,8 +16,7 @@ PathList::~PathList() {
 }
 
 void PathList::add(std::shared_ptr<PathNode> newVertex) {
-//  newVertex->setNext(tail_);
-  tail_->setNext(newVertex);
+  newVertex->setNext(tail_);
   tail_ = newVertex;
 }
 
