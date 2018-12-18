@@ -22,18 +22,20 @@ std::shared_ptr<PathNode> PathMap::findNearest(std::shared_ptr<PathNode> vertex)
       min_distance = distance;
       nearestVertex = curr;
     }
+    curr = curr->getNext();
   }
   return nearestVertex;
 }
 void PathMap::addVertex(std::shared_ptr<PathNode> newVertex) {
   vertices_->add(newVertex);
 }
-int PathMap::outputPathFound(unsigned long *x_vertices, unsigned long *y_vertices, const int size) const {
+int PathMap::outputPathFound() const {
   std::shared_ptr<PathNode> pathVertex = vertices_->getTail();
   int i = 0;
-  for (; pathVertex != nullptr && i < size; ++i, pathVertex = pathVertex->getPointsTo()){
-    x_vertices[i] = pathVertex->getX();
-    y_vertices[i] = pathVertex->getY();
+  while (pathVertex != nullptr){
+    std::cout << pathVertex->getX() << "\t" << pathVertex->getY() << std::endl;
+    pathVertex = pathVertex->getPointsTo();
+    i++;
   }
   return i;
 }
