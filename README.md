@@ -1,7 +1,6 @@
-# Occypancy Grid Mapping
-Purpose: to simulate LiDAR sensor readings in occupancy grid to help a robot navigate through a 2D environment
+#Robot Navigation Project
 
-## How to compile and execute this project
+## How to compile and execute
 
 For Linux:
 
@@ -34,6 +33,9 @@ cd bin
 ```cmd
 ./robot-navigation
 ```
+
+# Section 1 - Occypancy Grid Mapping
+Purpose: to simulate LiDAR sensor readings in occupancy grid to help a robot navigate through a 2D environment
 
 ## Data Structure
 
@@ -86,6 +88,8 @@ sudo code
 // }
 ```
 
+# Section 2 - Path Planning
+
 ## Contributors
 Bryan Dedeurwaerder – bdedeurwaerder@nevada.unr.edu  
 Eric Duong - eduong@nevada.unr.edu  
@@ -94,5 +98,3 @@ Alton Prentice - aprentice@nevada.unr.edu
 ## References
 
 http://www.cs.cmu.edu/~16831-f14/notes/F14/16831_lecture06_agiri_dmcconac_kumarsha_nbhakta.pdf
-
-# Path Planning
