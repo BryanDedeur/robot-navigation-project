@@ -1,5 +1,6 @@
 #Robot Navigation Project
 > The Data Structures Bonus project
+
 ![Alt text](OccupancyMap.png?raw=true "Random Snakes Occupancy Map")
 
 ## How to compile and execute
