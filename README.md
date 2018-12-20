@@ -65,7 +65,7 @@ The following is the results of the log odd mean testing at static robot positio
 | 8   | 7.2            |	-5.6          |	15848931.92	 |0.000002511886432|
 | 9	  | 8.1            |	-6.3          |	125892541.2	 |0.0000005011872336|
 
-![Alt text](OccupancyDataAnalysis.png?raw=true "Occupancy Analysis")
+![Alt text](OccupancyResults.png?raw=true "Occupancy Results")
 
 <a href="probability-map.ppm" download="probability-map.ppm">Actual Probability Map.ppm</a>
 
@@ -105,6 +105,8 @@ sudo code
 ## Data Structure
 
 ## Results
+
+> this part of the project is not fully debugged so it wont compile properly
 
 ## Contributors
 Bryan Dedeurwaerder – bdedeurwaerder@nevada.unr.edu  
