@@ -1,5 +1,5 @@
 #Robot Navigation Project
-
+> The Data Structures Bonus project
 ## How to compile and execute
 
 For Linux:
@@ -49,9 +49,21 @@ The output of the data is represented on a portable pixel map (.ppm) image file 
 - Red pixels: are unoccupied points detected by the LiDAR (log odd mean result)
 - Blue pixels: are occupied points detected by the LiDAR (log odd mean result)
 
-##### Reoccuring LiDAR scan at a single point
+##### Reoccuring LiDAR scans at a single point
 
 The following is the results of the log odd mean testing at static robot position
+
+|scan |	LOM (occupied) | LOM (unoccupied) | Occupied Odd | Unoccupied Odd |
+|-----|----------------|------------------|--------------|----------------|
+| 1	  | 0.9	           | -0.7             |	7.943282347  | 	0.1995262315  |
+| 2	  | 1.8	           | -1.4             |	63.09573445  |	0.03981071706 | 
+| 3	  | 2.7	           | -2.1             |	501.1872336  |	0.007943282347|
+| 4	  | 3.6	           | -2.8             |	3981.071706  |	0.001584893192|
+| 5	  | 4.5            |	-3.5          |	31622.7766   |	0.000316227766|
+| 6	  | 5.4            |	-4.2          |	251188.6432  |	0.00006309573445|
+| 7	  | 6.3            |	-4.9          |1995262.315	 |0.00001258925412|
+| 8   | 7.2            |	-5.6          |	15848931.92	 |0.000002511886432|
+| 9	  | 8.1            |	-6.3          |	125892541.2	 |0.0000005011872336|
 
 ![Alt text](OccupancyDataAnalysis.png?raw=true "Occupancy Analysis")
 
@@ -89,6 +101,10 @@ sudo code
 ```
 
 # Section 2 - Path Planning
+
+## Data Structure
+
+## Results
 
 ## Contributors
 Bryan Dedeurwaerder – bdedeurwaerder@nevada.unr.edu  
