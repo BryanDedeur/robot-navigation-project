@@ -1,0 +1,38 @@
+@startuml
+
+class PathNode
+class PathList
+class PathMap
+
+PathList "0,.." *-- PathNode
+PathMap "1" *-- PathList
+
+class PathNode{
+    -x_: unsigned long
+    -y_: unsigned long
+    -pointsTo_: std::shared_ptr<PathNode>
+    -next_: std::shared_ptr<PathNode>
+    +getX(): unsigned long
+    +getY(): unsigned long
+    +getPointsTo(): std::shared_ptr<PathNode>
+    +getNext(): std::shared_ptr<PathNode>
+    +setCoordinate(x: unsigned long, y: unsigned long): void
+    +setPointsTo(pointsTo: std::shared_ptr<PathNode>): void
+    +setNext(next: std::shared_ptr<PathNode>): void
+    +operator==(rhsNode: std::shared_ptr<PathNode>): void
+}
+
+class PathList{
+    -tail_: std::shared_ptr<PathNode>
+    +add(newVertex: std::shared_ptr<PathNode>): void
+    +getTail(): std::shared_ptr<PathNode>
+}
+
+class PathMap{
+    -vertices_: std::unique_ptr<PathList>
+    +findNearest(vertex: std::shared_ptr<PathNode>): std::shared_ptr<PathNode>
+    +addVertex(newVertex: std::shared_ptr<PathNode>): void
+    +outputPathFound(): int
+}
+
+@enduml
