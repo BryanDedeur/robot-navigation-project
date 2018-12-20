@@ -101,8 +101,14 @@ sudo code
 ```
 
 # Section 2 - Path Planning
+Purpose: to map a random path avoiding collidable objects
 
 ## Data Structure
+This part of the project required the following classes for successful path finding
+- Path Map Class - tracks the path list class from start to destination and all nodes in between
+- Path List Class - this tracks the individual nodes in a linked list to store a connected chain of all possible results
+- Path Node Class - this defines each individual node to ensure connectivity in the list as well as in the path
+- Vector Map Class - containing all the occupancy data of the actual map
 
 ## Results
 
