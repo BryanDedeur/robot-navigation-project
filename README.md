@@ -134,6 +134,11 @@ The image below demonstrates our ability to plot random points and navigate betw
 
 ![Alt text](RandomLines.png?raw=true "Randomly connected lines")
 
+## Error
+
+Currently, the Path Planning section does not compile with correct result, because the main.cpp program is stuck in an infinite loop inside the collides() function inside main.cpp file. Our approach to checking collision between two points is to increment x and y coordinates by small amount and checking for occupancy in each coordinate along the line connecting two points. The loop infinitely increments the coordinates pass the end point.
+
+If we have more time, we will re-design our collision checking function and make sure it correctly detects collision and does not loop infinitely.
 
 ## Contributors
 Bryan Dedeurwaerder – bdedeurwaerder@nevada.unr.edu  
