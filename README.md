@@ -47,6 +47,8 @@ This part of the project required the following classes for successful occupancy
 The main file will define the robot positions where LiDAR readings are measured and random points throughout the map.
 The main file also contains code that connects lines between random points for the purpose of the second part of the project.
 
+As the LiDAR beams pass through the free spaces, they update the free spaces by subtracting each free space’s log_odd_mean with log_odd_mean_free constant (0.7). When the beams encounter the obstacle, they stop traveling forward, update the occupied space by adding the space’s log_odd_mean with log_odd_mean_occupied constant (0.9). The length of each beam is 50 units. The lower the log_odd_mean, the redder the pixel gets. The higher the log_odd_mean, the bluer the pixel gets.
+
 ### UML Diagram for Class Structure
 ![Alt text](OccupancyGridMappingUML.png?raw=true "Occupancy Grid Mapping Class UML")
 
@@ -114,6 +116,10 @@ This part of the project required the following classes for successful path find
 - Path List Class - this tracks the individual nodes in a linked list to store a connected chain of all possible results
 - Path Node Class - this defines each individual node to ensure connectivity in the list as well as in the path
 - Vector Map Class - containing all the occupancy data of the actual map
+
+### UML Diagram for Class Structure
+
+![Alt text](PathPlanning.png?raw=true "Path Planning Class UML")
 
 ## Results
 
