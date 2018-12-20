@@ -1,4 +1,4 @@
-## Robot Navigation Project
+### Occypancy Grid Mapping
 Purpose: to simulate LiDAR sensor readings in occupancy grid to help a robot navigate through a 2D environment
 
 ## How to compile and execute this project
@@ -100,3 +100,5 @@ Alton Prentice - aprentice@nevada.unr.edu
 ## References
 
 http://www.cs.cmu.edu/~16831-f14/notes/F14/16831_lecture06_agiri_dmcconac_kumarsha_nbhakta.pdf
+
+### Path Planning
