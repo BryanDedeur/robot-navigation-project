@@ -125,8 +125,9 @@ This part of the project required the following classes for successful path find
 
 > This part of the project is not fully debugged. Though it might compile there will be some logic errors and possible infinite loops.
 
-![Alt text](RandomLines.png?raw=true "Randomly connected lines")
+The image below demonstrates our ability to plot random points and navigate between coordinate pairs and traverse every point inbetween to check occpancy information.
 
+![Alt text](RandomLines.png?raw=true "Randomly connected lines")
 
 
 ## Contributors
