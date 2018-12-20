@@ -108,7 +108,7 @@ sudo code
 ```
 
 # Section 2 - Path Planning
-Purpose: to map a random path avoiding collidable objects
+Purpose: to map a random path from a start to a destination avoiding collidable objects
 
 ## Data Structure
 This part of the project required the following classes for successful path finding
@@ -123,10 +123,11 @@ This part of the project required the following classes for successful path find
 
 ## Results
 
+> This part of the project is not fully debugged. Though it might compile there will be some logic errors and possible infinite loops.
+
 ![Alt text](RandomLines.png?raw=true "Randomly connected lines")
 
 
-> this part of the project is not fully debugged so it wont compile properly
 
 ## Contributors
 Bryan Dedeurwaerder – bdedeurwaerder@nevada.unr.edu  
