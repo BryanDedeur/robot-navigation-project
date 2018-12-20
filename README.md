@@ -117,6 +117,11 @@ This part of the project required the following classes for successful path find
 - Path Node Class - this defines each individual node to ensure connectivity in the list as well as in the path
 - Vector Map Class - containing all the occupancy data of the actual map
 
+The list of vertices and edges are implemented as a single, modified linked-list. As each valid vertex is added to the end of the list, the vertex (called PathNode) has a pointsTo_ data member that contains the pointer of the PathNode that it connects to. When the destination (end) is found, the program traverses through the pointsTo_ data member to the start of the list, which is the initial starting point of the path. Edges can be drawn by connecting two coordinate points.
+
+
+![Alt text](Path-Planning-Structure.png?raw=true "Path Planning Structure")
+
 ### UML Diagram for Class Structure
 
 ![Alt text](PathPlanning.png?raw=true "Path Planning Class UML")
