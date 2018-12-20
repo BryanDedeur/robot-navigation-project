@@ -49,19 +49,9 @@ The output of the data is represented on a portable pixel map (.ppm) image file 
 
 ##### Reoccuring LiDAR scan at a single point
 
-The following is the results of the log odd mean testing at robot position (400, 225)
+The following is the results of the log odd mean testing at static robot position
 
-| scan | LOM (occupied) | LOM (unoccupied) |
-| ---- | -------------- | ---------------- |
-| 1    | 0.9            | -0.7             |
-| 2    | 1.8            | -1.4             |
-| 3    | 2.7            | -2.1             |
-| 4    | 3.6            | -2.8             |
-| 5    | 4.5            | -3.5             |
-| 6    | 5.4            | -4.2             |
-| 7    | 6.3            | -4.9             |
-| 8    | 7.2            | -5.6             |
-| 9    | 8.1            | -6.3             |
+![Alt text](OccupancyDataAnalysis.png?raw=true "Occupancy Analysis")
 
 <a href="probability-map.ppm" download="probability-map.ppm">Actual Probability Map.ppm</a>
 
