@@ -35,6 +35,10 @@ cd bin
 ./robot-navigation
 ```
 
+## Data Structure
+
+For this project, we use stl vector as 1000x1000 map containing 1,000,000 nodes with occupancy and log_odd_mean. The map is initialized with zero log_odd_means and area of obstacle as occupied. As the 
+
 ## Results
 
 The output of the data is represented on a portable pixel map (.ppm) image file containing RGB color values for every pixel location.
