@@ -1,5 +1,7 @@
 #Robot Navigation Project
 > The Data Structures Bonus project
+![Alt text](OccupancyMap.png?raw=true "Random Snakes Occupancy Map")
+
 ## How to compile and execute
 
 For Linux:
@@ -38,8 +40,15 @@ cd bin
 Purpose: to simulate LiDAR sensor readings in occupancy grid to help a robot navigate through a 2D environment
 
 ## Data Structure
+This part of the project required the following classes for successful occupancy tracking
+- Vector Map Class - contains the true occupancy data of the map as well as handles the ray casting from the robot LiDAR
+- Map Node Class - contains occupancy log odd mean information at a tested coordinate
 
-For this project, we use stl vector as 1000x1000 map containing 1,000,000 nodes with occupancy and log_odd_mean. The map is initialized with zero log_odd_means and area of obstacle as occupied. As the 
+The main file will define the robot positions where LiDAR readings are measured and random points throughout the map.
+The main file also contains code that connects lines between random points for the purpose of the second part of the project.
+
+### UML Diagram for Class Structure
+![Alt text](OccupancyGridMappingUML.png?raw=true "Occupancy Grid Mapping Class UML")
 
 ## Results
 
@@ -70,10 +79,6 @@ The following is the results of the log odd mean testing at static robot positio
 <a href="probability-map.ppm" download="probability-map.ppm">Actual Probability Map.ppm</a>
 
 ![Alt text](Probability-map.png?raw=true "Probability Map")
-
-## UML Diagram for Class Structure
-
-![Alt text](OccupancyGridMappingUML.png?raw=true "Occupancy Grid Mapping Class UML")
 
 ## LiDAR to Occupancy Grid Calculation Approach
 
@@ -111,6 +116,9 @@ This part of the project required the following classes for successful path find
 - Vector Map Class - containing all the occupancy data of the actual map
 
 ## Results
+
+![Alt text](RandomLines.png?raw=true "Randomly connected lines")
+
 
 > this part of the project is not fully debugged so it wont compile properly
 
