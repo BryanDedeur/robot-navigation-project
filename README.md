@@ -1,5 +1,4 @@
-#Robot Navigation Project
-> The Data Structures Bonus project
+# Robot Navigation Project
 
 ![Alt text](OccupancyMap.png?raw=true "Random Snakes Occupancy Map")
 
