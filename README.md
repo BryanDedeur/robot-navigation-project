@@ -117,6 +117,8 @@ This part of the project required the following classes for successful path find
 - Path Node Class - this defines each individual node to ensure connectivity in the list as well as in the path
 - Vector Map Class - containing all the occupancy data of the actual map
 
+The main file in the path finding folder will contian the raw information for the occupancy map and will define the starting point and target destination. A while loop will continuously generate nodes as long as they are valid. Every valid node is then connected to the nearest node. Once a the path succesfully connects from start to finish the node generation will stop.
+
 The list of vertices and edges are implemented as a single, modified linked-list. As each valid vertex is added to the end of the list, the vertex (called PathNode) has a pointsTo_ data member that contains the pointer of the PathNode that it connects to. When the destination (end) is found, the program traverses through the pointsTo_ data member to the start of the list, which is the initial starting point of the path. Edges can be drawn by connecting two coordinate points.
 
 
